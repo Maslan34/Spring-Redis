@@ -50,7 +50,7 @@ public class RedisConfig {
     public RedisCacheManager cacheManager(RedisConnectionFactory redisConnectionFactory) {
         RedisCacheConfiguration cacheConfig = RedisCacheConfiguration.defaultCacheConfig()
                 .disableCachingNullValues()
-                .entryTtl(Duration.ofMinutes(10))  // Varsayılan olarak 10 dakika süreyle cache tutsun
+                .entryTtl(Duration.ofMinutes(10))  // Keeps cache for 10 minutes by default
                 .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer()));
 
         return RedisCacheManager.builder(redisConnectionFactory)
