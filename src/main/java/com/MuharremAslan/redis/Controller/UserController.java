@@ -30,9 +30,9 @@ public class UserController {
 
     @GetMapping("/{id}")
     public User getUserById(@PathVariable Long id) {
-        System.out.println(">>> API çağrısı alındı, ID: " + id);
+        System.out.println(">>> API call received, ID: " + id);
         User user = userService.getUserById(id);
-        System.out.println(">>> Kullanıcı bulundu ve dönüldü: " + user.getUsername());
+        System.out.println(">>> Find User: " + user.getUsername());
         return user;
     }
 

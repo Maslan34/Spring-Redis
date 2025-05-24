@@ -22,17 +22,15 @@ public class UserService {
     @Cacheable(cacheNames = "user_id",key="#root.methodName+ #id",unless = "#result=null")
     public User getUserById(Long id) {
         System.out.println(">>>Fetching user from DB, ID: " + id);
-        return userRepository.findById(id).orElse(null); // kullanıcı yoksa null dön
+        return userRepository.findById(id).orElse(null); // Null if no user
     }
 
-    // value da yazılan cacheler silinecek.
-    // allEntries
     @CacheEvict(value = {"users","users_id"},allEntries = true)
     public User addUser(User user){
         return userRepository.save(user);
     }
 
-    @Cacheable(value = "users",key = "#root.methodName",unless ="#result==null " ) // unless hiç data dönmezse
+    @Cacheable(value = "users",key = "#root.methodName",unless ="#result==null " ) // unless in case of no data
     public List<User> getUsers() {
         return userRepository.findAll();
     }
@@ -51,4 +49,7 @@ public class UserService {
     public void deleteUserById(Long id) {
          userRepository.deleteById(id);
     }
+
+
+
 }

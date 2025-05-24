@@ -34,12 +34,15 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         String username = null;
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             jwtToken = authHeader.substring(7);
-            username = jwtService.extractUserDetails(jwtToken);
+            username = jwtService.extractUsername(jwtToken);
         }
 
-        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) //Her istek bir threaddir bu threadde Auth olmayacak bunun kontrolü
+        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) //Each request is a thread, there will be no Auth in this thread.
         {
+            // Getting valid user from db
             UserDetails user = userDetailsService.loadUserByUsername(username);
+
+            // Matching user and jwttoken here
             if (jwtService.validateToken(jwtToken, user)) {
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
