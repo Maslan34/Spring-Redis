@@ -1,5 +1,6 @@
 package com.MuharremAslan.redis.Service;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,10 +12,10 @@ import java.util.Map;
 @RequestMapping("/api/otp")
 public class OTPService {
 
-    private final RedisTemplate<String, Object> redisTemplate;
+    private final RedisTemplate<String, String> redisTemplate;
     private final MailService mailService;
 
-    public OTPService(RedisTemplate<String, Object> redisTemplate, MailService mailService) {
+    public OTPService(@Qualifier("redisTemplate")RedisTemplate<String, String> redisTemplate, MailService mailService) {
         this.redisTemplate = redisTemplate;
         this.mailService = mailService;
     }

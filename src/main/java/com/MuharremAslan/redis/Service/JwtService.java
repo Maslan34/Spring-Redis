@@ -5,6 +5,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,7 +27,7 @@ public class JwtService {
     private String SECRET_KEY;
     private final RedisTemplate<String, String> redisTemplate;
 
-    public JwtService(RedisTemplate<String, String> redisTemplate) {
+    public JwtService(@Qualifier("redisTemplate") RedisTemplate<String, String> redisTemplate) {
         this.redisTemplate = redisTemplate;
     }
 
