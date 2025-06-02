@@ -329,6 +329,7 @@ src/main/java/com/MuharremAslan/redis/
 
 <details>
   <summary>FIGUREs</summary>
+  
   ![rate_test2](https://github.com/user-attachments/assets/a64f3094-88a5-4f0f-804b-4e8eb0c2931c)
   *Multiple requests made via phone were rejected*
   ![rate_test](https://github.com/user-attachments/assets/62f696ed-4cdc-4bac-97cf-11d18e01f7dd)
